@@ -1,5 +1,6 @@
 //Core Imports
 const mongoose = require('mongoose');
+const slugify = require('slugify');
 
 const subredditSchema = mongoose.Schema({
 	name: {
@@ -28,6 +29,10 @@ const subredditSchema = mongoose.Schema({
 	imageLogo: {
 		type: String
 	}
+});
+subredditSchema.pre('save', function(next) {
+	this.slug = slugify(this.name, { lower: true });
+	next();
 });
 
 const Subreddit = mongoose.model('Subreddit', subredditSchema);
