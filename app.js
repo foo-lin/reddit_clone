@@ -4,6 +4,7 @@ const morgan = require('morgan');
 
 // Relative Imports
 const subredditRouter = require('./routes/subreddit.route');
+const userRouter = require('./routes/user.route');
 const globalErrorController = require('./controllers/errorController');
 
 //App Initialization
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //Routes
 app.use('/api/v1/subreddit', subredditRouter);
+app.use('/api/v1/user', userRouter);
 
 app.use(globalErrorController);
 
