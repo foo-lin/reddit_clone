@@ -1,6 +1,6 @@
 //relative import
 const Comment = require('../models/comment.model');
-const { getAll, createOne } = require('./handlerFactory');
+const { createOne } = require('./handlerFactory');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
 
@@ -61,3 +61,5 @@ exports.getComment = catchAsync(async (req, res, next) => {
 		}
 	});
 });
+
+// exports.deleteComment = catchAsync();

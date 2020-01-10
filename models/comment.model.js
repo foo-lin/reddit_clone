@@ -1,6 +1,9 @@
 //Core imports
 const mongoose = require('mongoose');
 
+//Relative import
+const Post = require('./post.model');
+
 const commentSchema = mongoose.Schema(
 	{
 		commentText: {
@@ -21,6 +24,10 @@ const commentSchema = mongoose.Schema(
 			type: Date,
 			default: Date.now()
 		},
+		votes: {
+			type: Number,
+			default: 0
+		},
 		parent: {
 			type: mongoose.Schema.ObjectId,
 			ref: 'Comment',
@@ -32,6 +39,21 @@ const commentSchema = mongoose.Schema(
 		toObject: { virtuals: true }
 	}
 );
+
+commentSchema.statics.calcNumOfComments = async function(postId) {
+	const stats = await this.aggregate([
+		{
+			$match: { post: postId }
+		},
+		{
+			$group: {
+				_id: null,
+				nComments: { $sum: 1 }
+			}
+		}
+	]);
+	await Post.findByIdAndUpdate(postId, { numComments: stats[0].nComments });
+};
 
 commentSchema.virtual('children', {
 	ref: 'Comment',
@@ -51,6 +73,10 @@ commentSchema.pre(/^find/, function(next) {
 		select: 'username'
 	});
 	next();
+});
+
+commentSchema.post('save', function() {
+	this.constructor.calcNumOfComments(this.post);
 });
 
 const Comment = mongoose.model('Comment', commentSchema);

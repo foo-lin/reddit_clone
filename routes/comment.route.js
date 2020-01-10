@@ -9,9 +9,11 @@ const {
 	getComment,
 	setUserPostId
 } = require('../controllers/comment.controller');
+const votesCommentUserRoute = require('./votesCommentuser.route');
 
 const router = express.Router({ mergeParams: true });
 
+router.use('/:commentId/vote', votesCommentUserRoute);
 router
 	.route('/')
 	.get(getAllComments)

@@ -2,6 +2,7 @@
 const Post = require('../models/post.model');
 const { createOne } = require('./handlerFactory');
 const catchAsync = require('../utils/catchAsync');
+const APIFeatures = require('../utils/ApiFeatures');
 
 //Contorllers
 exports.setSubredditUserid = (req, res, next) => {
@@ -15,7 +16,12 @@ exports.getAllPost = catchAsync(async (req, res, next) => {
 	if (req.params.subredditId) {
 		filter = { subreddit: req.params.subredditId };
 	}
-	const posts = await Post.find(filter);
+	const document = new APIFeatures(
+		Post.find(filter),
+		req.query
+	).limitFields();
+	const posts = await document.query;
+
 	res.status(200).json({
 		status: 'success',
 		length: posts.length,

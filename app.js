@@ -7,6 +7,7 @@ const subredditRouter = require('./routes/subreddit.route');
 const userRouter = require('./routes/user.route');
 const postRouter = require('./routes/post.route');
 const commentRouter = require('./routes/comment.route');
+const voteCommentUserRouter = require('./routes/votesCommentuser.route');
 const globalErrorController = require('./controllers/errorController');
 
 //App Initialization
@@ -22,6 +23,7 @@ app.use('/api/v1/subreddit', subredditRouter);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/post', postRouter);
 app.use('/api/v1/comment', commentRouter);
+app.use('/api/v1/votes', voteCommentUserRouter);
 
 app.use(globalErrorController);
 
