@@ -39,12 +39,12 @@ exports.createOne = (Model, propertyName) =>
 	});
 
 // Get One
-exports.getOne = (Model, propertyName) =>
+exports.getOne = (Model, propertyName, populateOptions) =>
 	catchAsync(async (req, res, next) => {
-		const query = Model.findById(req.params.id);
-		// if (popOptions) {
-		// 	query = query.populate(popOptions);
-		// }
+		let query = Model.findById(req.params.id);
+		if (populateOptions) {
+			query = query.populate(populateOptions);
+		}
 		const document = await query;
 		if (!document) {
 			return next(

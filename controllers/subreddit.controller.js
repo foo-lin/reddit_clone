@@ -7,6 +7,7 @@ const {
 	updateOne,
 	deleteOne
 } = require('./handlerFactory');
+const catchAsync = require('../utils/catchAsync');
 
 //Desc: Get all Subreddits
 //Route:GET  /api/v1/subreddit
@@ -21,7 +22,7 @@ exports.createSubreddit = createOne(Subreddit, 'subreddit');
 //Desc: Get one Subreddits
 //Route:Get /api/v1/subreddit/id
 //Access: public
-exports.getSubreddit = getOne(Subreddit, 'subreddit');
+exports.getSubreddit = getOne(Subreddit, 'subreddit', { path: 'posts' });
 
 //Desc: Delete one Subreddits
 //Route:Delete /api/v1/subreddit/id

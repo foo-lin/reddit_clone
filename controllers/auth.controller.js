@@ -67,8 +67,8 @@ exports.protect = catchAsync(async (req, res, next) => {
 		token,
 		process.env.JWT_SECRET
 	);
-	const currentUser = User.findById(decode);
-	res.user = currentUser;
+	const currentUser = await User.findById(decode.id);
+	req.user = currentUser;
 	next();
 });
 
