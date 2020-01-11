@@ -7,7 +7,6 @@ const {
 	updateOne,
 	deleteOne
 } = require('./handlerFactory');
-const catchAsync = require('../utils/catchAsync');
 
 //Desc: Get all Subreddits
 //Route:GET  /api/v1/subreddit

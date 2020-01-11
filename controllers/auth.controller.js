@@ -85,3 +85,23 @@ exports.restrictTo = (...roles) => {
 		next();
 	};
 };
+
+exports.isLoggedIn = catchAsync(async (req, res, next) => {
+	if (req.user) return next();
+	if (
+		req.headers.authorization &&
+		req.headers.authorization.startsWith('Bearer')
+	) {
+		const token = req.headers.authorization.split(' ')[1];
+		if (token) {
+			const decode = await util.promisify(jwt.verify)(
+				token,
+				process.env.JWT_SECRET
+			);
+			const currentUser = await User.findById(decode.id);
+			req.user = currentUser;
+			return next();
+		}
+	}
+	next();
+});

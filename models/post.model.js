@@ -54,5 +54,11 @@ const postSchema = mongoose.Schema(
 // 	next();
 // });
 
+postSchema.virtual('hasVoted', {
+	ref: 'VotesPostUser',
+	foreignField: 'post',
+	localField: '_id'
+});
+
 const Post = mongoose.model('Post', postSchema);
 module.exports = Post;

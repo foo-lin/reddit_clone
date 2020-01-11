@@ -1,24 +1,29 @@
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
+const APIFeatures = require('../utils/ApiFeatures');
 
 //Get All
-exports.getAll = (Model, propertyName) =>
+exports.getAll = (Model, propertyName, checkParams) =>
 	catchAsync(async (req, res, next) => {
-		// let filter;
-		// if (req.params.tourId) {
-		// 	filter = { tour: req.params.tourId };
-		// }
-		// const document = new APIFeatures(Model.find(filter), req.query)
-		// 	.filter()
-		// 	.sort()
-		// 	.limitFields()
-		// .paginations();
-		const document = await Model.find();
+		let filter;
+		if (req.params[checkParams]) {
+			filter = { tour: req.params[checkParams] };
+		}
+		const doc = new APIFeatures(Model.find(filter), req.query)
+			.filter()
+			.sort()
+			.limitFields()
+			.paginations();
+		if (req.populateOptions) {
+			doc.query.populate(req.populateOptions);
+		}
+
+		const document = await doc.query;
 
 		// const doc = await document.query;
 		res.status(200).json({
 			status: 'success',
-			results: document.length,
+			result: document.length,
 			data: {
 				[propertyName]: document
 			}

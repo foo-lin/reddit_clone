@@ -67,6 +67,12 @@ commentSchema.virtual('havechildren', {
 	count: true
 });
 
+commentSchema.virtual('hasUserVoted', {
+	ref: 'VotesCommentUser',
+	foreignField: 'comment',
+	localField: '_id'
+});
+
 commentSchema.pre(/^find/, function(next) {
 	this.populate({
 		path: 'user',
