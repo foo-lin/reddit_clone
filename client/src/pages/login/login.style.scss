@@ -1,0 +1,21 @@
+.login-form {
+	&__divider {
+		height: 2rem;
+	}
+
+	&__footer {
+		margin-top: 10rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		p {
+			font-size: 1.4rem;
+
+			a {
+				text-decoration: none;
+				color: var(--color-accent);
+			}
+		}
+	}
+}
