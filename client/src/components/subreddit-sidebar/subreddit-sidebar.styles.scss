@@ -1,0 +1,50 @@
+.community-details {
+	&__desc {
+		font-size: 1.4rem;
+		line-height: 2rem;
+		word-spacing: 2px;
+		margin-bottom: 1rem;
+	}
+	&__stats {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 1rem;
+		padding-bottom: 1rem;
+		border-bottom: 1px solid var(--color-grey-light-4);
+		&-users {
+			display: flex;
+			flex-direction: column;
+			font-size: 2rem;
+			font-weight: 700;
+			span {
+				font-weight: 100;
+				font-size: 1.1rem;
+			}
+		}
+
+		&-online {
+			display: flex;
+			flex-direction: column;
+			font-size: 2rem;
+			font-weight: 700;
+			span {
+				font-weight: 100;
+				font-size: 1.1rem;
+			}
+		}
+	}
+	&__bday {
+		font-size: 1.4rem;
+		padding: 0.4rem 0;
+	}
+}
+.modeartors {
+	list-style: none;
+	li {
+		font-size: 1.4rem;
+	}
+}
+
+.about {
+	font-size: 1.4rem;
+}

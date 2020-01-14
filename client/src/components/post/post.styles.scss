@@ -1,0 +1,41 @@
+.post {
+	&__heading {
+		display: flex;
+		width: 20rem;
+
+		// justify-content: space-between;
+		align-items: center;
+
+		h4 {
+			font-size: 1.2rem;
+		}
+
+		span {
+			font-size: 1.1rem;
+		}
+	}
+	&__icon {
+		fill: var(--color-grey-dark-3);
+		padding-top: 0.5rem;
+	}
+
+	&__sec {
+		display: flex;
+		margin-bottom: 1rem;
+
+		&__img {
+			border-radius: 7px;
+			padding: 3px 3px 3px 0;
+			width: 6rem;
+			height: 6rem;
+		}
+		&__title {
+			font-size: 1.6rem;
+			font-weight: 400;
+			letter-spacing: 1px;
+			line-height: 2rem;
+			padding: 0 3px;
+			margin-left: 0.7rem;
+		}
+	}
+}

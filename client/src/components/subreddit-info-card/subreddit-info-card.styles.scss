@@ -1,0 +1,27 @@
+.subreddit-info-card {
+	width: 23vw;
+	border-radius: 5px;
+	overflow: hidden;
+	box-shadow: 0.1rem 0.3rem 0.5rem rgba(black, 0.4);
+	&:not(:last-child) {
+		margin-bottom: 2rem;
+	}
+
+	&:last-child {
+		// width: 20rem;
+		position: sticky;
+		top: 5.3rem;
+	}
+	&__title {
+		padding: 0.8rem 2rem;
+		width: 100%;
+		background-color: var(--color-primary-dark);
+		font-size: 1.6rem;
+		color: white;
+		text-transform: capitalize;
+		font-weight: 700;
+	}
+	&__children {
+		padding: 0.8rem 2rem;
+	}
+}

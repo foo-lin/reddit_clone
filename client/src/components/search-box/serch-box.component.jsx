@@ -14,7 +14,7 @@ const SearchBox = () => {
 			<input
 				type="text"
 				className="search__input"
-				placeHolder="Search reddit"
+				placeholder="Search reddit"
 			/>
 			<button className="search__button">
 				<SearchLogo className="search__icon" />

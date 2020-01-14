@@ -1,0 +1,29 @@
+.sort-by {
+	display: flex;
+	align-items: center;
+	width: 8rem;
+	justify-content: space-between;
+	&__current {
+		display: inline-block;
+		span {
+			color: var(--color-grey-dark-3);
+			font-size: 1.1rem;
+			font-weight: 300;
+		}
+	}
+	&__icon {
+		width: 20px;
+		height: 20px;
+		fill: var(--color-grey-dark-3);
+	}
+	&__dropdown-icon {
+		position: relative;
+		background-color: none;
+		border-radius: 50%;
+		cursor: pointer;
+		transition: all 0.3s;
+		&:hover {
+			background-color: var(--color-grey-light-3);
+		}
+	}
+}

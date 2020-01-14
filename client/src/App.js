@@ -5,6 +5,7 @@ import './App.scss';
 import Header from './components/header/header.component';
 import SignUp from './pages/sighup/sighup.component';
 import Login from './pages/login/login.component.jsx';
+import Subreddit from './pages/subreddit/subreddit.component';
 import HomePage from './pages/homepage/homepage.component.jsx';
 function App() {
 	return (
@@ -13,6 +14,7 @@ function App() {
 			<Switch>
 				<Route path="/login" exact component={Login} />
 				<Route path="/signup" exact component={SignUp} />
+				<Route path="/a" component={Subreddit} />
 				<Route path="/" render={() => <HomePage />} />
 			</Switch>
 		</div>

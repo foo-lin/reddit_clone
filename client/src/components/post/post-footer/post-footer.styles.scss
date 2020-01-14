@@ -1,0 +1,42 @@
+.post-footer {
+	display: flex;
+	justify-content: space-between;
+	font-size: 1.2rem;
+
+	&__start {
+		display: flex;
+		flex: 0 0 15rem;
+
+		justify-content: space-between;
+	}
+	&__end {
+		display: flex;
+		flex: 0 0 13rem;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&__votes {
+		display: flex;
+		flex-basis: 60%;
+		justify-content: space-between;
+	}
+
+	&__icon {
+		width: 1.7rem;
+		height: 1.7rem;
+		fill: var(--color-grey-dark-4);
+	}
+	&__share {
+		flex: 0 0 35%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	&__comment {
+		flex: 0 0 50%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+}
