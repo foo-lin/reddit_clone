@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const slugify = require('slugify');
 
 const userSchema = mongoose.Schema({
 	username: {
@@ -16,7 +17,7 @@ const userSchema = mongoose.Schema({
 		lowercase: true,
 		validate: [validator.isEmail, 'Please provide a valid email']
 	},
-	photo: {
+	photoColor: {
 		type: String
 	},
 	role: {
@@ -39,6 +40,10 @@ const userSchema = mongoose.Schema({
 			}
 		}
 	},
+	createdAt: {
+		type: Date,
+		default: Date.now()
+	},
 	active: {
 		type: Boolean,
 		default: true,
@@ -50,6 +55,27 @@ userSchema.pre('save', async function(next) {
 	if (!this.isModified('password')) return next();
 	this.password = await bcrypt.hash(this.password, 10);
 	this.passwordConfirm = undefined;
+	next();
+});
+
+userSchema.pre('save', function(next) {
+	const randomColor = [
+		'red',
+		'blue',
+		'orangered',
+		'pink',
+		'orchid',
+		'green',
+		'voilet',
+		'yellowgreen'
+	];
+	this.photoColor =
+		randomColor[Math.floor(Math.random() * randomColor.length)];
+	next();
+});
+
+userSchema.pre('save', function(next) {
+	this.username = slugify(this.username, '_');
 	next();
 });
 
