@@ -8,7 +8,6 @@ import { formateDate } from '../../utils/dateTime.js';
 import './subreddit-sidebar.styles.scss';
 
 const SubredditSidebar = ({ modarators, desc, numUsers, createdAt }) => {
-	console.log(formateDate(createdAt));
 	return (
 		<>
 			<SubredditInfoCard title="About community">
