@@ -15,7 +15,13 @@ const subredditSchema = mongoose.Schema(
 			],
 			minlength: [3, 'Subreddit name must be atleast 3 characters long']
 		},
-		summary: {
+		title: {
+			type: String,
+			required: true,
+			trim: true
+		},
+
+		desc: {
 			type: String,
 			trim: true,
 			required: [true, 'A Subreddit mush have a summay']
@@ -27,17 +33,23 @@ const subredditSchema = mongoose.Schema(
 		slug: {
 			type: String
 		},
-		imageBackground: {
+		imageBackgroundUrl: {
 			type: String
 		},
-		imageLogo: {
+		imageLogoUrl: {
 			type: String
 		},
 		numUsers: {
 			type: Number,
 			default: 0,
 			min: 0
-		}
+		},
+		modarators: [
+			{
+				type: mongoose.Schema.ObjectId,
+				ref: 'User'
+			}
+		]
 	},
 	{
 		toJSON: { virtuals: true },

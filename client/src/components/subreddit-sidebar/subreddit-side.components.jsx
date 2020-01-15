@@ -3,39 +3,38 @@ import React from 'react';
 
 //Relative Imports
 import SubredditInfoCard from '../subreddit-info-card/subreddit-info-card';
+import { formateDate } from '../../utils/dateTime.js';
 //styles
 import './subreddit-sidebar.styles.scss';
 
-const SubredditSidebar = () => {
+const SubredditSidebar = ({ modarators, desc, numUsers, createdAt }) => {
+	console.log(formateDate(createdAt));
 	return (
 		<>
 			<SubredditInfoCard title="About community">
 				<div className="community-details">
-					<p className="community-details__desc">
-						Lorem, ipsum dolor sit amet consectetur adipisicing
-						elit. Amet nulla quidem quas nisi porro velit?
-					</p>
+					<p className="community-details__desc">{desc}</p>
 					<div className="community-details__stats">
 						<div className="community-details__stats-users">
-							2000
+							{numUsers}
 							<span>Memebers</span>
 						</div>
 						<div className="community-details__stats-online">
-							2000
+							N/A
 							<span>Online</span>
 						</div>
 					</div>
 					<div className="community-details__bday">
-						Created Jan 24 2011
+						{formateDate(createdAt)}
 					</div>
 				</div>
 			</SubredditInfoCard>
 
 			<SubredditInfoCard title="Moderators">
 				<ul className="modeartors">
-					<li>one</li>
-					<li>one</li>
-					<li>one</li>
+					{modarators.map(mod => (
+						<li key={mod._id}>{`u/${mod.username}`}</li>
+					))}
 				</ul>
 			</SubredditInfoCard>
 

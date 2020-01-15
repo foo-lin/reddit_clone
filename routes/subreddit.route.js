@@ -7,7 +7,8 @@ const {
 	getAllSubreddit,
 	getSubreddit,
 	deleteSubreddit,
-	updateSubreddit
+	updateSubreddit,
+	getSubredditBySlug
 } = require('../controllers/subreddit.controller');
 const { isLoggedIn } = require('../controllers/auth.controller');
 const postRouter = require('./post.route');
@@ -22,6 +23,8 @@ router
 	.route('/')
 	.get(isLoggedIn, getAllSubreddit)
 	.post(createSubreddit);
+
+router.route('/:subredditSlug/slug').get(getSubredditBySlug);
 
 router
 	.route('/:id')

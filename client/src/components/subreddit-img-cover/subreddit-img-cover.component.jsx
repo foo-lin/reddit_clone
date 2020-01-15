@@ -4,9 +4,10 @@ import React from 'react';
 //Styles
 import './subredditImgCover.styles.scss';
 
-const SubredditImgCover = ({ imgUrl }) => {
-	if (imgUrl) {
+const SubredditImgCover = ({ imageBackgroundUrl }) => {
+	if (imageBackgroundUrl) {
+		return <img src={imageBackgroundUrl} alt="" className="imgCover" />;
 	}
-	return <div className="imgCover"></div>;
+	return <div className="backgroundDiv"></div>;
 };
 export default SubredditImgCover;

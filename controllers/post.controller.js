@@ -18,7 +18,6 @@ exports.setPopulateOption = (req, res, next) => {
 			options: { find: { user: req.user._id } }
 		};
 	}
-	console.log(req.user);
 	req.populateOptions = populateOptions;
 	next();
 };

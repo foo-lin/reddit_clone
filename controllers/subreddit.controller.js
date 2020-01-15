@@ -1,4 +1,6 @@
 //Relative Imports
+const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/AppError');
 const Subreddit = require('../models/subreddit.model');
 const {
 	getAll,
@@ -32,3 +34,20 @@ exports.deleteSubreddit = deleteOne(Subreddit);
 //Route:Patch /api/v1/subreddit/id
 //Access: private
 exports.updateSubreddit = updateOne(Subreddit, 'subreddit');
+
+exports.getSubredditBySlug = catchAsync(async (req, res, next) => {
+	const document = await Subreddit.findOne({
+		slug: req.params.subredditSlug
+	}).populate({ path: 'modarators', select: '-__v -email' });
+	if (!document) {
+		return next(
+			new AppError('Sorry, No commuity exist with that name', 404)
+		);
+	}
+	res.json({
+		status: 'success',
+		data: {
+			subreddit: document
+		}
+	});
+});
