@@ -1,5 +1,9 @@
 //Core Import
 import React from 'react';
+import { connect } from 'react-redux';
+
+//relative imports
+import { selectCurrentSubredditImgCover } from '../../redux/subreddit/subreddit.selector';
 
 //Styles
 import './subredditImgCover.styles.scss';
@@ -10,4 +14,9 @@ const SubredditImgCover = ({ imageBackgroundUrl }) => {
 	}
 	return <div className="backgroundDiv"></div>;
 };
-export default SubredditImgCover;
+
+const mapStateToProps = state => ({
+	imageBackgroundUrl: selectCurrentSubredditImgCover(state)
+});
+
+export default connect(mapStateToProps)(SubredditImgCover);

@@ -11,7 +11,12 @@ import SubredditPostContainer from '../subreddit-post-container/subreddit-posts-
 import Container from '../container/contanainer.component';
 import LoadingIcon from '../loading/loading.component';
 
-import { setCurrentSubreddit } from '../../redux/subreddit/subreddit.actions';
+//redux
+import { fetchSubredditStartAsync } from '../../redux/subreddit/subreddit.actions';
+import {
+	selectCurrentSubreddit,
+	selectIsSubredditFetching
+} from '../../redux/subreddit/subreddit.selector';
 
 //Styles
 import './subreddit-overview.styles.scss';
@@ -19,38 +24,28 @@ import './subreddit-overview.styles.scss';
 const SubredditOverview = ({
 	match,
 	currentSubreddit,
-	setCurrentSubreddit
+	isSubredditFetching,
+	fetchSubredditStartAsync
 }) => {
 	const { subredditSlug } = match.params;
-
+	console.log('sdf', isSubredditFetching);
 	useEffect(() => {
-		const getSubreddit = async () => {
-			const resp = await axios.get(
-				`http://localhost:5000/api/v1/subreddit/${subredditSlug}/slug`
-			);
-			setCurrentSubreddit({ ...resp.data.data.subreddit });
-		};
-		getSubreddit();
+		fetchSubredditStartAsync(subredditSlug);
 	}, [subredditSlug]);
 
-	if (!currentSubreddit) return <LoadingIcon />;
+	if (isSubredditFetching || !currentSubreddit) return <LoadingIcon />;
 
 	return (
 		<div>
-			<SubredditImgCover
-				imageBackgroundUrl={currentSubreddit.imageBackgroundUrl}
-			/>
+			<SubredditImgCover />
 			<Container>
-				<SubredditDetails
-					name={currentSubreddit.name}
-					title={currentSubreddit.title}
-					imageLogoUrl={currentSubreddit.imageLogoUrl}
-				/>
+				<SubredditDetails />
 			</Container>
 			<Container>
 				<div className="subreddit">
 					<div className="subreddit__main">
-						<SubredditPostContainer />
+						{/* <SubredditPostContainer /> */}
+						{/* <LoadingIcon /> */}
 					</div>
 					<div className="subreddit__sidebar">
 						<SubredditSidebar
@@ -68,14 +63,15 @@ const SubredditOverview = ({
 
 const mapStateToProps = state => {
 	return {
-		currentSubreddit: state.subreddit.currentSubreddit
+		currentSubreddit: selectCurrentSubreddit(state),
+		isSubredditFetching: selectIsSubredditFetching(state)
 	};
 };
 
 const mapDispatchToProps = dispatch => {
 	return {
-		setCurrentSubreddit: subreddit =>
-			dispatch(setCurrentSubreddit(subreddit))
+		fetchSubredditStartAsync: subredditSlug =>
+			dispatch(fetchSubredditStartAsync(subredditSlug))
 	};
 };
 

@@ -1,21 +1,24 @@
 //Core imports
 import React from 'react';
-
+import { connect } from 'react-redux';
 //Relative Imports
 import SubredditInfoCard from '../subreddit-info-card/subreddit-info-card';
 import { formateDate } from '../../utils/dateTime.js';
+import { selectCurrentSubreddit } from '../../redux/subreddit/subreddit.selector';
 //styles
 import './subreddit-sidebar.styles.scss';
 
-const SubredditSidebar = ({ modarators, desc, numUsers, createdAt }) => {
+const SubredditSidebar = ({ currentSubreddit }) => {
 	return (
 		<>
 			<SubredditInfoCard title="About community">
 				<div className="community-details">
-					<p className="community-details__desc">{desc}</p>
+					<p className="community-details__desc">
+						{currentSubreddit.desc}
+					</p>
 					<div className="community-details__stats">
 						<div className="community-details__stats-users">
-							{numUsers}
+							{currentSubreddit.numUsers}
 							<span>Memebers</span>
 						</div>
 						<div className="community-details__stats-online">
@@ -24,14 +27,14 @@ const SubredditSidebar = ({ modarators, desc, numUsers, createdAt }) => {
 						</div>
 					</div>
 					<div className="community-details__bday">
-						{formateDate(createdAt)}
+						{formateDate(currentSubreddit.createdAt)}
 					</div>
 				</div>
 			</SubredditInfoCard>
 
 			<SubredditInfoCard title="Moderators">
 				<ul className="modeartors">
-					{modarators.map(mod => (
+					{currentSubreddit.modarators.map(mod => (
 						<li key={mod._id}>{`u/${mod.username}`}</li>
 					))}
 				</ul>
@@ -46,4 +49,10 @@ const SubredditSidebar = ({ modarators, desc, numUsers, createdAt }) => {
 	);
 };
 
-export default SubredditSidebar;
+const mapStateToProps = state => {
+	return {
+		currentSubreddit: selectCurrentSubreddit(state)
+	};
+};
+
+export default connect(mapStateToProps)(SubredditSidebar);
