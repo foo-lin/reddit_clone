@@ -11,8 +11,7 @@ const Subreddit = props => {
 	return (
 		<>
 			<Route
-				exact
-				path={`${match.path}/:subredditSlug`}
+				path={`${match.path}/:subredditSlug/`}
 				component={SubredditOverview}
 			/>
 		</>

@@ -19,6 +19,15 @@
 		padding-top: 0.5rem;
 	}
 
+	&__img {
+		// background-color: red;
+		width: 100%;
+		border-radius: 4px;
+		max-height: 40rem;
+		object-fit: cover;
+		object-position: top;
+	}
+
 	&__sec {
 		display: flex;
 		margin-bottom: 1rem;
@@ -28,14 +37,26 @@
 			padding: 3px 3px 3px 0;
 			width: 6rem;
 			height: 6rem;
+			margin-right: 0.7rem;
 		}
 		&__title {
-			font-size: 1.6rem;
-			font-weight: 400;
+			font-size: 1.4rem;
+			font-weight: 500;
 			letter-spacing: 1px;
-			line-height: 2rem;
-			padding: 0 3px;
-			margin-left: 0.7rem;
+			line-height: 1.8rem;
+			a:visited,
+			a:link {
+				text-decoration: none;
+				color: var(--color-grey-dark-1);
+				&:active {
+					color: var(--color-primary);
+				}
+			}
+			p {
+				&:not(:last-child) {
+					margin-bottom: 0.7rem;
+				}
+			}
 		}
 	}
 }

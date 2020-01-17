@@ -25,11 +25,6 @@ const subredditReducer = (state = initialState, action) => {
 				errorMessage: action.payload
 			};
 
-		case SubredditActionTypes.SET_CURRENT_SUBREDDIT:
-			return {
-				...state,
-				currentSubreddit: action.payload
-			};
 		default:
 			return state;
 	}

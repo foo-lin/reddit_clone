@@ -26,9 +26,7 @@ export const fetchSubredditStartAsync = subredditSlug => {
 	return async dispatch => {
 		dispatch(fetchSubredditStart());
 		try {
-			const resp = await axios.get(
-				`http://localhost:5000/api/v1/subreddit/${subredditSlug}/slug`
-			);
+			const resp = await axios.get(`/subreddit/${subredditSlug}/slug`);
 			dispatch(fetchSubredditSuccess(resp.data.data.subreddit));
 		} catch (error) {
 			dispatch(fetchSubredditFailure(error.message));

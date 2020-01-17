@@ -1,19 +1,26 @@
 //Core imports
 import React from 'react';
+import { connect } from 'react-redux';
 
 //Relative Imports
 import Post from '../post/post.component';
 
+import { selectCurrentPosts } from '../../redux/posts/post.selector.js';
+
 // import './post.styles.scss';
 
-const Posts = () => {
+const Posts = ({ posts }) => {
 	return (
 		<>
-			<Post subredditName="WTF" time="2m" user="zinZinBa" postTitle="lorem sdf sdf sdf sdf dsfsdf sdf sdf sdfsdf sdf sdfsdf sdf sdf sdf sdf sdfsdf" imgUrl="sdf" />
-			<Post subredditName="WTF" time="2m" user="zinZinBa" postTitle="lorem sdf sdf sdf sdf dsfsdf sdf sdf sdfsdf sdf sdfsdf sdf sdf sdf sdf sdfsdf" imgUrl="sdf" />
-			<Post subredditName="WTF" time="2m" user="zinZinBa" postTitle="lorem sdf sdf sdf sdf dsfsdf sdf sdf sdfsdf sdf sdfsdf sdf sdf sdf sdf sdfsdf" imgUrl="sdf" />
+			{posts.map(post => (
+				<Post key={post._id} post={post} />
+			))}
 		</>
 	);
 };
 
-export default Posts;
+const mapStateToProps = state => {
+	return { posts: selectCurrentPosts(state) };
+};
+
+export default connect(mapStateToProps)(Posts);

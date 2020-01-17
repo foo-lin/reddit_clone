@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 //Relative Import
 import rootReducer from './root-reducer';
 
-const middleWares = [logger, thunk];
+const middleWares = [thunk, logger];
 
 const store = createStore(rootReducer, applyMiddleware(...middleWares));
 

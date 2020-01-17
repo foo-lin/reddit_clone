@@ -22,7 +22,7 @@ exports.setPopulateOption = (req, res, next) => {
 	next();
 };
 
-exports.getAllPost = getAll(Post, 'post', 'subredditId');
+exports.getAllPost = getAll(Post, 'post', 'subredditId', 'subreddit');
 
 // exports.getAllPost = catchAsync(async (req, res, next) => {
 // 	let filter = {};

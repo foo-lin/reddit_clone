@@ -12,7 +12,7 @@ import { ReactComponent as ShareIcon } from '../../../assets/SVG/redo2.svg';
 //Styles
 import './post-footer.styles.scss';
 
-const PostFooter = () => {
+const PostFooter = ({ numComments, votes }) => {
 	return (
 		<div className="post-footer">
 			<div className="post-footer__start">
@@ -22,7 +22,7 @@ const PostFooter = () => {
 				</div>
 				<div className="post-footer__comment">
 					<CommentIcon className="post-footer__icon" />
-					<span>Comment</span>
+					<span>{numComments ? numComments : 'Comments'}</span>
 				</div>
 			</div>
 			<div className="post-footer__end">
@@ -33,7 +33,13 @@ const PostFooter = () => {
 					<div className="post-footer__upvote">
 						<ArrowUpIcon className="post-footer__icon" />
 					</div>
-					<div className="post-footer__num-comments">33</div>
+					<div className="post-footer__num-comments">
+						{votes ? (
+							votes
+						) : (
+							<DotIcon className="post-footer__icon" />
+						)}
+					</div>
 					<div className="post-footer__downvote">
 						<div className="post-footer__downvote">
 							<ArrowDownIcon className="post-footer__icon" />

@@ -1,0 +1,27 @@
+.comment-header {
+	border-bottom: 1px solid var(--color-grey-light-3);
+	padding-bottom: 1.3rem;
+	&__title {
+		font-size: 1.8rem;
+		font-weight: 400;
+		color: black;
+		margin-bottom: 0.7rem;
+		p {
+			line-height: 2rem;
+			&:not(:last-child) {
+				margin-bottom: 0.2rem;
+			}
+		}
+	}
+
+	&__user {
+		font-size: 1.4rem;
+		margin-bottom: 0.7rem;
+	}
+
+	&__text {
+		font-size: 1.4rem;
+		margin-bottom: 0.7rem;
+		line-height: 2rem;
+	}
+}

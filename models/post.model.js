@@ -6,7 +6,8 @@ const postSchema = mongoose.Schema(
 		title: {
 			type: String,
 			required: [true, 'Please enter a post title'],
-			maxlength: [10, 'Title length exceeded max limit']
+			maxlength: [500, 'Title length exceeded max limit'],
+			minlength: [5, 'Title length exceeded max limit']
 		},
 		postText: {
 			type: String,
@@ -23,6 +24,9 @@ const postSchema = mongoose.Schema(
 		createdAt: {
 			type: Date,
 			default: Date.now()
+		},
+		imgLink: {
+			type: String
 		},
 		subreddit: {
 			type: mongoose.Schema.ObjectId,
@@ -44,15 +48,16 @@ const postSchema = mongoose.Schema(
 	}
 );
 
-// postSchema.pre(/^find/, function(next) {
-// 	this.populate({
-// 		path: 'subreddit',
-// 		select: 'name'
-// 	}).populate({
-// 		path: 'user'
-// 	});
-// 	next();
-// });
+postSchema.pre(/^find/, function(next) {
+	this.populate({
+		path: 'subreddit',
+		select: 'name'
+	}).populate({
+		path: 'user',
+		select: '_id username photoColor'
+	});
+	next();
+});
 
 postSchema.virtual('hasVoted', {
 	ref: 'VotesPostUser',

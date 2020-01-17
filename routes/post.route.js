@@ -22,7 +22,7 @@ router.use('/:postId/comment', commentRouter);
 router.use('/:postId/vote', votesPostUserRoute);
 router
 	.route('/')
-	.get(isLoggedIn, setPopulateOption, getAllPost)
+	.get(getAllPost)
 	.post(protect, restrictTo('user'), setSubredditUserid, createPost);
 
 module.exports = router;

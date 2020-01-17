@@ -12,7 +12,17 @@ export const selectCurrentSubredditImgCover = createSelector(
 	currentSubreddit => currentSubreddit.imageBackgroundUrl
 );
 
+export const selectCurrentSubredditId = createSelector(
+	[selectCurrentSubreddit],
+	currentSubreddit => currentSubreddit._id
+);
+
 export const selectIsSubredditFetching = createSelector(
 	[selectSubreddit],
 	subreddit => subreddit.isFetching
+);
+
+export const selectIsCollectionLoaded = createSelector(
+	[selectSubreddit],
+	subreddit => !!subreddit.currentSubreddit
 );

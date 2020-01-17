@@ -3,11 +3,11 @@ const AppError = require('../utils/AppError');
 const APIFeatures = require('../utils/ApiFeatures');
 
 //Get All
-exports.getAll = (Model, propertyName, checkParams) =>
+exports.getAll = (Model, propertyName, checkParams, paramField) =>
 	catchAsync(async (req, res, next) => {
 		let filter;
 		if (req.params[checkParams]) {
-			filter = { tour: req.params[checkParams] };
+			filter = { [paramField]: req.params[checkParams] };
 		}
 		const doc = new APIFeatures(Model.find(filter), req.query)
 			.filter()

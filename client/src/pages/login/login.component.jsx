@@ -25,7 +25,6 @@ const Login = () => {
 
 	const handleSubmit = evt => {
 		evt.preventDefault();
-		console.log(userCredentials);
 		setUserCredentials(initialState);
 	};
 	return (
