@@ -29,7 +29,8 @@ const Post = ({ post, match }) => {
 	if (match.params.sortBy) {
 		url = url.replace(match.params.sortBy, '');
 	}
-	url = `${url}comment/${_id}`;
+	console.log('ddddddd', url);
+	url = `${url}/comment/${_id}`;
 	return (
 		<PostContainer>
 			<div className="post">

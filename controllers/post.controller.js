@@ -1,6 +1,6 @@
 //Relative import
 const Post = require('../models/post.model');
-const { createOne, getAll } = require('./handlerFactory');
+const { createOne, getAll, getOne } = require('./handlerFactory');
 
 //Contorllers
 exports.setSubredditUserid = (req, res, next) => {
@@ -49,3 +49,4 @@ exports.getAllPost = getAll(Post, 'post', 'subredditId', 'subreddit');
 // });
 
 exports.createPost = createOne(Post, 'post');
+exports.getPost = getOne(Post, 'post');

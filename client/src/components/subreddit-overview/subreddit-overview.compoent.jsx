@@ -54,7 +54,8 @@ const SubredditOverview = ({
 							/>
 
 							<Route
-								path={`${match.url}/comment/:postId`}
+								exact
+								path={`${match.url}/comment/:postId/:commentId?`}
 								component={Comment}
 							/>
 						</Switch>

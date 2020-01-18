@@ -5,6 +5,7 @@ const express = require('express');
 const {
 	getAllPost,
 	createPost,
+	getPost,
 	setPopulateOption,
 	setSubredditUserid
 } = require('../controllers/post.controller');
@@ -24,5 +25,7 @@ router
 	.route('/')
 	.get(getAllPost)
 	.post(protect, restrictTo('user'), setSubredditUserid, createPost);
+
+router.route('/:id').get(getPost);
 
 module.exports = router;
