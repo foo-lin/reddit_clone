@@ -10,15 +10,15 @@ import { ReactComponent as MessageIcon } from '../../../assets/SVG/message.svg';
 //styles
 import './comment-footer.styles.scss';
 
-const CommmentfFooter = () => {
+const CommmentFooter = ({ numVotes }) => {
 	return (
 		<div className="comment-footer">
 			<ArrowUpIcon className="comment-footer__icon" />
-			<span>2</span>
+			<span>{numVotes}</span>
 			<ArrowDownIcon className="comment-footer__icon" />
 			<MessageIcon className="comment-footer__icon" />
 		</div>
 	);
 };
 
-export default CommmentfFooter;
+export default CommmentFooter;

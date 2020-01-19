@@ -15,11 +15,9 @@ import { fetchPostsSuccess } from '../../redux/posts/posts.actions';
 import './comment.styles.scss';
 
 const Comment = ({ match, post, setPost }) => {
-	console.log('ddddd', match);
 	useEffect(() => {
 		async function getPost() {
 			const resp = await axios.get(`/post/${match.params.postId}`);
-			console.log(resp);
 			setPost(resp.data.data.post);
 		}
 		if (!post) {

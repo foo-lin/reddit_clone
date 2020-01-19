@@ -46,7 +46,7 @@ const SingleComment = ({ comment, fetchComment, match, history }) => {
 				<div className="comment__text--content">
 					{comment.commentText}
 				</div>
-				<CommentFooter />
+				<CommentFooter numVotes={comment.votes} />
 				{comment.children && (
 					<CommentList comments={comment.children} />
 				)}

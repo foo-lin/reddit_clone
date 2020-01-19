@@ -11,6 +11,7 @@
 	transition: all 0.5s;
 	height: 3rem;
 	cursor: pointer;
+	position: relative;
 
 	&:hover {
 		background-color: rgba(#03a9f4, 0.4);

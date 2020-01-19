@@ -19,7 +19,7 @@ const Header = () => {
 						<CompanyLogo />
 					</Link>
 					<span className="logo__name">
-						Aidd<span>i</span>t
+						Aedd<span>i</span>t
 					</span>
 				</div>
 
@@ -29,7 +29,7 @@ const Header = () => {
 					<Link to="/signup">
 						<CustomButton>Sign In</CustomButton>
 					</Link>
-					<Link to="login">
+					<Link to="/login">
 						<CustomButton inverted>Log in</CustomButton>
 					</Link>
 					<MenuLogo className="user-nav__logo" />
@@ -37,6 +37,10 @@ const Header = () => {
 			</div>
 		</header>
 	);
+};
+
+const mapStateToProps = state => {
+	return { isUserLoaded: '', user: '' };
 };
 
 export default Header;

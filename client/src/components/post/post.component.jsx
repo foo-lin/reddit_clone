@@ -27,9 +27,8 @@ const Post = ({ post, match }) => {
 	const [imgOpen, setImgOpen] = useState(false);
 	let url = match.url;
 	if (match.params.sortBy) {
-		url = url.replace(match.params.sortBy, '');
+		url = url.replace(`/${match.params.sortBy}`, '');
 	}
-	console.log('ddddddd', url);
 	url = `${url}/comment/${_id}`;
 	return (
 		<PostContainer>

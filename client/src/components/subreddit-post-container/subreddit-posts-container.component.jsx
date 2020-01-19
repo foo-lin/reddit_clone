@@ -42,7 +42,6 @@ const SubredditPostsContainer = ({
 		} else {
 			url = `${url}/${evt.target.value}`;
 		}
-		console.log(url);
 		history.push(url);
 	};
 

@@ -1,10 +1,18 @@
 // Core import
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 // Relaive Import
 import FormInput from '../../components/form-input/form-input.component';
 import AuthCard from '../../components/auth-card/auth-card.component';
 import CustomButton from '../../components/custom-button/custom-button.component';
+
+import {
+	selectIsUserFetching,
+	selectIsUserLoaded
+} from '../../redux/user/user.selector.js';
+import { fetchSignUpUserAsync } from '../../redux/user/user.actions';
+
 // Styles
 import './signup.style.scss';
 
@@ -15,7 +23,7 @@ const initialState = {
 	passwordConfirm: ''
 };
 
-const SignUp = () => {
+const SignUp = ({ userLoaded, isUserFetching, signupUser }) => {
 	const [userCredentials, setUserCredentials] = useState(initialState);
 	const { username, email, password, passwordConfirm } = userCredentials;
 
@@ -26,9 +34,11 @@ const SignUp = () => {
 
 	const handleSubmit = evt => {
 		evt.preventDefault();
-		console.log(userCredentials);
+		signupUser(userCredentials);
 		setUserCredentials(initialState);
 	};
+
+	if (userLoaded) return <Redirect to="/" />;
 
 	return (
 		<AuthCard title="Sign Up">
@@ -67,15 +77,32 @@ const SignUp = () => {
 				/>
 				<div className="signup-form__footer">
 					<p>
-						New to Aeddit? &nbsp;
+						Already have an account? &nbsp;
 						<Link to="/login" className="login__link">
-							Sign Up
+							Login
 						</Link>
 					</p>
-					<CustomButton type="submit">Sign Up</CustomButton>
+					<CustomButton type="submit" loading={isUserFetching}>
+						Sign Up
+					</CustomButton>
 				</div>
 			</form>
 		</AuthCard>
 	);
 };
-export default SignUp;
+
+const mapStateToProps = state => {
+	return {
+		userLoaded: selectIsUserLoaded(state),
+		isUserFetching: selectIsUserFetching(state)
+	};
+};
+
+const mapDispatchToProps = dispatch => {
+	return {
+		signupUser: userCredentials =>
+			dispatch(fetchSignUpUserAsync(userCredentials))
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
