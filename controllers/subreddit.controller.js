@@ -36,9 +36,11 @@ exports.deleteSubreddit = deleteOne(Subreddit);
 exports.updateSubreddit = updateOne(Subreddit, 'subreddit');
 
 exports.getSubredditBySlug = catchAsync(async (req, res, next) => {
-	const document = await Subreddit.findOne({
+	const query = Subreddit.findOne({
 		slug: req.params.subredditSlug
 	}).populate({ path: 'modarators', select: '-__v -email' });
+
+	const document = await query;
 	if (!document) {
 		return next(
 			new AppError('Sorry, No commuity exist with that name', 404)

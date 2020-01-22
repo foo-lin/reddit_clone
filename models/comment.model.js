@@ -70,7 +70,8 @@ commentSchema.virtual('havechildren', {
 commentSchema.virtual('hasUserVoted', {
 	ref: 'VotesCommentUser',
 	foreignField: 'comment',
-	localField: '_id'
+	localField: '_id',
+	justOne: true
 });
 
 commentSchema.pre(/^find/, function(next) {
@@ -78,6 +79,17 @@ commentSchema.pre(/^find/, function(next) {
 		path: 'user',
 		select: 'username photoColor'
 	});
+	next();
+});
+
+commentSchema.pre(/^find/, function(next) {
+	if (this.userId || this.options.userId) {
+		this.populate({
+			path: 'hasUserVoted',
+			select: 'vote',
+			options: { find: { user: this.userId || this.options.userId } }
+		});
+	}
 	next();
 });
 

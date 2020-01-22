@@ -62,7 +62,8 @@ postSchema.pre(/^find/, function(next) {
 postSchema.virtual('hasVoted', {
 	ref: 'VotesPostUser',
 	foreignField: 'post',
-	localField: '_id'
+	localField: '_id',
+	justOne: true
 });
 
 const Post = mongoose.model('Post', postSchema);

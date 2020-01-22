@@ -24,7 +24,7 @@ router
 	.get(isLoggedIn, getAllSubreddit)
 	.post(createSubreddit);
 
-router.route('/:subredditSlug/slug').get(getSubredditBySlug);
+router.route('/:subredditSlug/slug').get(isLoggedIn, getSubredditBySlug);
 
 router
 	.route('/:id')

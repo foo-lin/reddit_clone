@@ -65,6 +65,14 @@ subredditSchema.virtual('posts', {
 	localField: '_id'
 });
 
+subredditSchema.virtual('subscribed', {
+	ref: 'SubredditUser',
+	foreignField: 'subreddit',
+	localField: '_id',
+	justOne: true,
+	count: true
+});
+
 subredditSchema.pre('save', function(next) {
 	this.slug = slugify(this.name, { lower: true });
 	next();

@@ -16,19 +16,15 @@ const Post = ({ post, match }) => {
 		subreddit: { name },
 		title,
 		numComments,
-		postText,
 		user: { username },
 		votes,
 		imgLink,
 		createdAt,
-		_id
+		_id,
+		hasVoted
 	} = post;
-
 	const [imgOpen, setImgOpen] = useState(false);
-	let url = match.url;
-	if (match.params.sortBy) {
-		url = url.replace(`/${match.params.sortBy}`, '');
-	}
+	let url = match.url.replace(/\/?(new|old|top)?$/, '');
 	url = `${url}/comment/${_id}`;
 	return (
 		<PostContainer>
@@ -72,10 +68,15 @@ const Post = ({ post, match }) => {
 						<img src={imgLink} alt="" className="post__img" />
 					</div>
 				)}
-				<PostFooter numComments={numComments} votes={votes} />
+				<PostFooter
+					numComments={numComments}
+					votes={votes}
+					postId={_id}
+					hasVoted={hasVoted ? hasVoted : { vote: 0 }}
+				/>
 			</div>
 		</PostContainer>
 	);
 };
 
-export default withRouter(Post);
+export default withRouter(React.memo(Post));

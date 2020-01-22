@@ -22,6 +22,12 @@ export const fetchUserFailure = errorMsg => {
 	};
 };
 
+export const deleteUser = () => {
+	return {
+		type: UserActionTypes.DELETE_USER
+	};
+};
+
 export const fetchUserStartAsync = ({ email, password }) => {
 	return async dispatch => {
 		dispatch(fetchUserStart());
@@ -36,6 +42,18 @@ export const fetchUserStartAsync = ({ email, password }) => {
 			});
 			dispatch(fetchUserSuccess(resp.data.data.user));
 			dispatch(saveToken(resp.data.data.token));
+		} catch (error) {
+			dispatch(fetchUserFailure(error.message));
+		}
+	};
+};
+
+export const fetctLoggedInUserAsync = () => {
+	return async dispatch => {
+		dispatch(fetchUserStart);
+		try {
+			const resp = await axios.get('/user/isloggedin');
+			dispatch(fetchUserSuccess(resp.data.data.user));
 		} catch (error) {
 			dispatch(fetchUserFailure(error.message));
 		}

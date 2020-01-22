@@ -23,9 +23,9 @@ router.use('/:postId/comment', commentRouter);
 router.use('/:postId/vote', votesPostUserRoute);
 router
 	.route('/')
-	.get(getAllPost)
+	.get(isLoggedIn, setPopulateOption, getAllPost)
 	.post(protect, restrictTo('user'), setSubredditUserid, createPost);
 
-router.route('/:id').get(getPost);
+router.route('/:id').get(isLoggedIn, setPopulateOption, getPost);
 
 module.exports = router;

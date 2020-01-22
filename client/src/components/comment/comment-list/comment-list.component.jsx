@@ -6,11 +6,16 @@ import SingleComment from '../comment-single/comment-single.component';
 //Styles
 import './comment-list.styles.scss';
 
-const CommentList = ({ comments }) => {
+const CommentList = ({ comments, postId, parentList }) => {
+	let commentArray = Object.values(comments);
 	return (
 		<>
-			{comments.map(comment => (
-				<SingleComment key={comment._id} comment={comment} />
+			{commentArray.map(comment => (
+				<SingleComment
+					key={comment._id}
+					comment={comment}
+					parentList={parentList}
+				/>
 			))}
 		</>
 	);

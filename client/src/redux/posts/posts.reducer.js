@@ -1,4 +1,5 @@
 import { PostsActionTypes } from './posts.types';
+import { updateVotes } from './posts.utils';
 
 const initialState = {
 	currentPosts: [],
@@ -21,6 +22,11 @@ const postsReducer = (state = initialState, action) => {
 				...state,
 				isFetching: false,
 				errorMessage: action.payload
+			};
+		case PostsActionTypes.UPDATE_POST_VOTES:
+			return {
+				...state,
+				currentPosts: updateVotes(state.currentPosts, action.payload)
 			};
 
 		default:

@@ -28,7 +28,7 @@ const Comment = ({ match, post, setPost }) => {
 	return (
 		<PostContainer>
 			<PostHeader post={post} />
-			<Button>Join To Comment</Button>
+			<Button>Login To Comment</Button>
 
 			<CommentContainer postId={post._id} />
 		</PostContainer>

@@ -6,21 +6,25 @@ const AppError = require('../utils/AppError');
 
 //Utils
 
-const commentFourLevelDeep = {
-	path: 'children',
-	options: { sort: { createdAt: 1 } },
-	populate: {
+const commentFourLevelDeep = userId => {
+	return {
 		path: 'children',
-		model: 'Comment',
+		options: { sort: { createdAt: 1 }, userId },
 		populate: {
 			path: 'children',
 			model: 'Comment',
+			options: { userId },
 			populate: {
-				path: 'havechildren',
-				model: 'Comment'
+				path: 'children',
+				model: 'Comment',
+				options: { userId },
+				populate: {
+					path: 'havechildren',
+					model: 'Comment'
+				}
 			}
 		}
-	}
+	};
 };
 
 //Contorllers
@@ -37,7 +41,14 @@ exports.getAllComments = catchAsync(async (req, res, next) => {
 	if (req.params.postId) {
 		filter = { post: req.params.postId, parent: null };
 	}
-	const comments = await Comment.find(filter).populate(commentFourLevelDeep);
+	const query = Comment.find(filter);
+	if (req.user) {
+		query.userId = req.user._id;
+	}
+
+	const comments = await query.populate(
+		commentFourLevelDeep(req.user && req.user._id)
+	);
 	res.status(200).json({
 		status: 'success',
 		length: comments.length,
@@ -48,11 +59,17 @@ exports.getAllComments = catchAsync(async (req, res, next) => {
 });
 
 exports.getComment = catchAsync(async (req, res, next) => {
-	const comment = await Comment.findById(req.params.id).populate(
-		commentFourLevelDeep
+	const query = Comment.findById(req.params.id);
+	if (req.user) {
+		query.userId = req.user._id;
+	}
+
+	const comment = await query.populate(
+		commentFourLevelDeep(req.user && req.user._id)
 	);
+
 	if (!comment) {
-		return next(new AppError('Comment not found or deleted'));
+		return next(new AppError('Comment not found or deleted', 400));
 	}
 	res.status(200).json({
 		status: 'success',

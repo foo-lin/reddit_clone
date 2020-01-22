@@ -1,6 +1,8 @@
 import React from 'react';
 
-const HomePage = () => {
+const HomePage = ({ token, userLoaded, fetctLoggedInUserAsync }) => {
+	//
 	return <div style={{ margin: '10rem' }}>sdf</div>;
 };
+
 export default HomePage;

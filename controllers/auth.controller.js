@@ -69,6 +69,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 	);
 	const currentUser = await User.findById(decode.id);
 	req.user = currentUser;
+
 	next();
 });
 
@@ -88,6 +89,7 @@ exports.restrictTo = (...roles) => {
 
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
 	if (req.user) return next();
+
 	if (
 		req.headers.authorization &&
 		req.headers.authorization.startsWith('Bearer')

@@ -45,3 +45,14 @@ export const fetchCommentStartAsyc = commentId => {
 		}
 	};
 };
+
+export const updateVote = (commentArr, vote, voteToAdd) => {
+	return {
+		type: CommentsActionTypes.UPDATE_VOTES,
+		payload: {
+			commentArr,
+			vote,
+			voteToAdd
+		}
+	};
+};

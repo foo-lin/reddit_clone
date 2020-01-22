@@ -36,3 +36,14 @@ export const fetchPostsStartAsync = (subredditId, sortBy) => {
 		}
 	};
 };
+
+export const updatePostVotes = (postId, vote, voteToAdd) => {
+	return {
+		type: PostsActionTypes.UPDATE_POST_VOTES,
+		payload: {
+			postId,
+			vote,
+			voteToAdd
+		}
+	};
+};

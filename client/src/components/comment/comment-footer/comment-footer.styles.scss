@@ -1,20 +1,53 @@
 .comment-footer {
 	margin: 1rem 0;
 	display: grid;
-	grid-template-columns: repeat(3, max-content) minmax(4rem, 1fr);
-	// grid-column-gap: 1rem;
-	min-width: 30%;
-	max-width: 30%;
-	justify-content: center;
+	grid-template-columns: repeat(3, max-content) max-content;
+	grid-column-gap: 1rem;
+
 	align-items: center;
 	&__icon {
 		width: 1.5rem;
 		height: 1.5rem;
 		fill: var(--color-grey-dark-4);
-		justify-self: center;
+		// justify-self: center;
+		&:last-child {
+			margin-left: 1rem;
+		}
+
+		&.upvoted {
+			fill: var(--color-primary-dark);
+			&.loading-up {
+				animation: up 1s ease-in-out infinite;
+			}
+		}
+		&.downvoted {
+			fill: orangered;
+			&.loading-down {
+				animation: down 1s ease-in-out infinite;
+			}
+		}
 	}
-	span {
-		padding: 0 1rem;
-		justify-self: center;
+}
+
+@keyframes up {
+	0% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-6px);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+@keyframes down {
+	0% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(6px);
+	}
+	100% {
+		transform: translateY(0);
 	}
 }

@@ -1,5 +1,6 @@
 //core import
-import React from 'react';
+import React, { memo } from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 //Relative Import
@@ -9,11 +10,19 @@ import CommentList from '../comment-list/comment-list.component';
 import Button from '../../custom-button/custom-button.component';
 import { getTimeDiff } from '../../../utils/dateTime';
 import { fetchCommentStartAsyc } from '../../../redux/comments/comments.actions';
+import { selectIsUserLoaded } from '../../../redux/user/user.selector';
 
 //Styles
 import './comment-single.styles.scss';
 
-const SingleComment = ({ comment, fetchComment, match, history }) => {
+const SingleComment = ({
+	comment,
+	postId,
+	fetchComment,
+	parentList,
+	match,
+	history
+}) => {
 	const loadComments = () => {
 		let url = match.url;
 		if (match.params.commentId) {
@@ -21,6 +30,7 @@ const SingleComment = ({ comment, fetchComment, match, history }) => {
 		}
 		history.push(`${url}/${comment._id}`);
 	};
+
 	return (
 		<div className={`comment ${comment.parent === null && 'root'}`}>
 			<div className="comment__user">
@@ -46,9 +56,21 @@ const SingleComment = ({ comment, fetchComment, match, history }) => {
 				<div className="comment__text--content">
 					{comment.commentText}
 				</div>
-				<CommentFooter numVotes={comment.votes} />
+				<CommentFooter
+					numVotes={comment.votes}
+					hasUserVoted={
+						comment.hasUserVoted
+							? comment.hasUserVoted
+							: { vote: 0 }
+					}
+					commentId={comment._id}
+					parentList={parentList}
+				/>
 				{comment.children && (
-					<CommentList comments={comment.children} />
+					<CommentList
+						comments={comment.children}
+						parentList={[...parentList, comment._id]}
+					/>
 				)}
 				{comment.havechildren && (
 					<Button inverted onClick={loadComments}>
@@ -66,4 +88,6 @@ const mapDispatchToProps = dispatch => {
 	};
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(SingleComment));
+export default memo(
+	withRouter(connect(null, mapDispatchToProps)(SingleComment))
+);

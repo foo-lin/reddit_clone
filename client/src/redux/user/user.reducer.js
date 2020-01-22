@@ -14,6 +14,8 @@ const userReducer = (state = initialState, action) => {
 			return { ...state, isFetching: false, currentUser: action.payload };
 		case UserActionTypes.FETCH_USER_FAILURE:
 			return { ...state, errorMsg: action.payload };
+		case UserActionTypes.DELETE_USER:
+			return { ...state, currentUser: null };
 		default:
 			return state;
 	}

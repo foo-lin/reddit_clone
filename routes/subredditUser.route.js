@@ -32,5 +32,13 @@ router
 		isUnsubscriped,
 		deleteSubredditUser
 	);
+router
+	.route('/is')
+	.get(protect, setSubredditUser, findSubscriptions, (req, res) => {
+		res.json({
+			status: 'success',
+			data: { isSub: Boolean(req.subreddituser) }
+		});
+	});
 
 module.exports = router;

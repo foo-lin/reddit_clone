@@ -50,6 +50,9 @@ exports.getOne = (Model, propertyName, populateOptions) =>
 		if (populateOptions) {
 			query = query.populate(populateOptions);
 		}
+		if (req.populateOptions) {
+			query = query.populate(req.populateOptions);
+		}
 		const document = await query;
 		if (!document) {
 			return next(

@@ -20,7 +20,12 @@ const CommentHeader = ({ post }) => {
 					<p key={i}>{pt}</p>
 				))}
 			</div>
-			<PostFooter numComments={post.numComments} votes={post.votes} />
+			<PostFooter
+				numComments={post.numComments}
+				votes={post.votes}
+				postId={post._id}
+				hasVoted={post.hasVoted ? post.hasVoted : { vote: 0 }}
+			/>
 		</div>
 	);
 };

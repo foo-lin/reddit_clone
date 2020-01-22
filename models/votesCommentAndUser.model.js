@@ -33,11 +33,10 @@ votesCommentUserSchema.statics.setVotes = async function(commentId) {
 			}
 		}
 	]);
-	let votes = 0;
-	if (stats) {
-		votes = stats[0].nVotes;
-	}
-	await Comment.findByIdAndUpdate(commentId, { votes });
+
+	await Comment.findByIdAndUpdate(commentId, {
+		votes: stats.length ? stats[0].nVotes : 0
+	});
 };
 
 votesCommentUserSchema.post('save', function() {

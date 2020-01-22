@@ -40,7 +40,7 @@ const CommentContainer = ({
 			{isFetching || !isCommentsLoaded ? (
 				<Loading />
 			) : (
-				<CommentList comments={comments} />
+				<CommentList comments={comments} parentList={[]} />
 			)}
 		</div>
 	);
